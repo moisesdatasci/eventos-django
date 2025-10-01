@@ -84,26 +84,26 @@ python manage.py runserver
 ```
 eventos-django/
 │
-├── eventos_web/              # Configuración del proyecto
-│   ├── settings.py           # Configuraciones generales
-│   ├── urls.py               # URLs principales
-│   └── wsgi.py               # WSGI para despliegue
+├── eventos_web/              
+│   ├── settings.py           
+│   ├── urls.py              
+│   └── wsgi.py               
 │
-├── eventos/                  # Aplicación principal
-│   ├── models.py             # Modelos: Evento y Participante
-│   ├── forms.py              # Formularios con validaciones
-│   ├── views.py              # Vistas de la aplicación
-│   ├── urls.py               # URLs de la aplicación
-│   ├── admin.py              # Configuración del admin
-│   └── templates/            # Plantillas HTML
+├── eventos/                 
+│   ├── models.py           
+│   ├── forms.py              
+│   ├── views.py              
+│   ├── urls.py               
+│   ├── admin.py             
+│   └── templates/            
 │       └── eventos/
-│           ├── base.html                 # Template base
-│           ├── form_template.html        # Template reutilizable
-│           ├── inicio.html               # Página principal
-│           ├── lista_eventos.html        # Lista de eventos
-│           ├── detalle_evento.html       # Detalle del evento
-│           ├── crear_evento.html         # Crear evento
-│           └── agregar_participante.html # Agregar participante
+│           ├── base.html                 
+│           ├── form_template.html        
+│           ├── inicio.html               
+│           ├── lista_eventos.html        
+│           ├── detalle_evento.html       
+│           ├── crear_evento.html         
+│           └── agregar_participante.html 
 │
 ├── db.sqlite3               
 ├── manage.py                
