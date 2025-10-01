@@ -1,0 +1,92 @@
+{% extends 'eventos/base.html' %}
+
+{% block title %}{{ evento.nombre }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-calendar-event"></i> Información del Evento
+                </h3>
+            </div>
+            <div class="card-body">
+                <h4>{{ evento.nombre }}</h4>
+                <hr>
+                <p>
+                    <i class="bi bi-calendar3"></i> 
+                    <strong>Fecha:</strong> {{ evento.fecha|date:"d \d\e F \d\e Y" }}
+                </p>
+                {% if evento.ubicacion %}
+                <p>
+                    <i class="bi bi-geo-alt"></i> 
+                    <strong>Ubicación:</strong> {{ evento.ubicacion }}
+                </p>
+                {% else %}
+                <p class="text-muted">
+                    <i class="bi bi-geo-alt"></i> 
+                    Sin ubicación especificada
+                </p>
+                {% endif %}
+                <p>
+                    <i class="bi bi-people"></i> 
+                    <strong>Total de Participantes:</strong> {{ participantes.count }}
+                </p>
+                <p class="text-muted small">
+                    <i class="bi bi-clock"></i> 
+                    Creado: {{ evento.fecha_creacion|date:"d/m/Y H:i" }}
+                </p>
+                
+                <div class="d-grid gap-2 mt-4">
+                    <a href="{% url 'agregar_participante' evento.id %}" class="btn btn-success">
+                        <i class="bi bi-person-plus"></i> Agregar Participante
+                    </a>
+                    <a href="{% url 'lista_eventos' %}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Volver a Eventos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-people"></i> Participantes
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if participantes %}
+                <div class="list-group">
+                    {% for participante in participantes %}
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">
+                                    <i class="bi bi-person-circle text-primary"></i>
+                                    {{ participante.nombre }}
+                                </h6>
+                                <p class="mb-0 text-muted small">
+                                    <i class="bi bi-envelope"></i> {{ participante.email }}
+                                </p>
+                            </div>
+                            <small class="text-muted">
+                                {{ participante.fecha_registro|date:"d/m/Y" }}
+                            </small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info text-center">
+                    <i class="bi bi-info-circle"></i>
+                    <p class="mb-0">Aún no hay participantes registrados para este evento.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

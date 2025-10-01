@@ -1,0 +1,53 @@
+{% extends 'eventos/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">{% block form_title %}Formulario{% endblock %}</h3>
+            </div>
+            <div class="card-body">
+                {% block form_description %}{% endblock %}
+                
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">
+                            {{ field.label }}
+                            {% if field.field.required %}
+                            <span class="text-danger">*</span>
+                            {% endif %}
+                        </label>
+                        {{ field }}
+                        
+                        {% if field.errors %}
+                        <div class="text-danger mt-1">
+                            {% for error in field.errors %}
+                            <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-check-circle"></i> {% block button_text %}Guardar{% endblock %}
+                        </button>
+                        <a href="{% block cancel_url %}{% url 'inicio' %}{% endblock %}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

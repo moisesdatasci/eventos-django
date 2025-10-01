@@ -1,0 +1,15 @@
+{% extends 'eventos/form_template.html' %}
+
+{% block title %}Crear Evento{% endblock %}
+
+{% block form_title %}
+<i class="bi bi-calendar-plus"></i> Crear Nuevo Evento
+{% endblock %}
+
+{% block form_description %}
+<p class="text-muted">Completa los datos del evento. Los campos marcados con <span class="text-danger">*</span> son obligatorios.</p>
+{% endblock %}
+
+{% block button_text %}Crear Evento{% endblock %}
+
+{% block cancel_url %}{% url 'inicio' %}{% endblock %}

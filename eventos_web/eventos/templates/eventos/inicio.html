@@ -1,0 +1,65 @@
+{% extends 'eventos/base.html' %}
+
+{% block title %}Inicio - Eventos{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Sistema de Registro de Eventos</h1>
+        <p class="col-md-8 fs-4">
+            Crea y gestiona eventos, agrega participantes y mantén todo organizado en un solo lugar.
+        </p>
+        <a href="{% url 'crear_evento' %}" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-circle"></i> Crear Nuevo Evento
+        </a>
+    </div>
+</div>
+
+<h2 class="mb-4">Eventos Recientes</h2>
+<div class="row">
+    {% for evento in eventos %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-calendar-event text-primary"></i>
+                    {{ evento.nombre }}
+                </h5>
+                <p class="card-text">
+                    <i class="bi bi-calendar3"></i> 
+                    <strong>Fecha:</strong> {{ evento.fecha|date:"d/m/Y" }}
+                </p>
+                {% if evento.ubicacion %}
+                <p class="card-text">
+                    <i class="bi bi-geo-alt"></i> 
+                    <strong>Ubicación:</strong> {{ evento.ubicacion }}
+                </p>
+                {% endif %}
+                <p class="card-text">
+                    <i class="bi bi-people"></i> 
+                    <strong>Participantes:</strong> {{ evento.participantes.count }}
+                </p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{% url 'detalle_evento' evento.id %}" class="btn btn-sm btn-primary">
+                    Ver Detalles
+                </a>
+                <a href="{% url 'agregar_participante' evento.id %}" class="btn btn-sm btn-success">
+                    <i class="bi bi-person-plus"></i> Agregar Participante
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4>No hay eventos registrados</h4>
+            <p>Comienza creando tu primer evento.</p>
+            <a href="{% url 'crear_evento' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Crear Evento
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'eventos/form_template.html' %}
+
+{% block title %}Agregar Participante{% endblock %}
+
+{% block form_title %}
+<i class="bi bi-person-plus"></i> Agregar Participante
+{% endblock %}
+
+{% block form_description %}
+<div class="alert alert-info">
+    <h5 class="alert-heading">
+        <i class="bi bi-calendar-event"></i> Evento: {{ evento.nombre }}
+    </h5>
+    <p class="mb-0">
+        <i class="bi bi-calendar3"></i> {{ evento.fecha|date:"d/m/Y" }}
+        {% if evento.ubicacion %}
+        | <i class="bi bi-geo-alt"></i> {{ evento.ubicacion }}
+        {% endif %}
+    </p>
+</div>
+<p class="text-muted">Ingresa los datos del participante. Todos los campos son obligatorios.</p>
+{% endblock %}
+
+{% block button_text %}Agregar Participante{% endblock %}
+
+{% block cancel_url %}{% url 'detalle_evento' evento.id %}{% endblock %}
